@@ -1,6 +1,9 @@
 ---
 import { content, LINKS } from '../i18n/content.js';
+import { getLatestRelease } from '../lib/release.js';
+
 const t = content.es;
+const release = await getLatestRelease();
 ---
 
 <section id="top" class="hero wrap">
@@ -24,10 +27,18 @@ const t = content.es;
   </div>
 
   <div class="hero-meta">
-    <span data-i18n="hero.metaVersion">{t.hero.metaVersion}</span>
-    <span class="dot">·</span>
-    <span data-i18n="hero.metaSize">{t.hero.metaSize}</span>
-    <span class="dot">·</span>
+    {release.version && (
+      <>
+        <span><span data-i18n="hero.metaVersion">{t.hero.metaVersion}</span> {release.version}</span>
+        <span class="dot">·</span>
+      </>
+    )}
+    {release.sizeLabel && (
+      <>
+        <span>{release.sizeLabel}</span>
+        <span class="dot">·</span>
+      </>
+    )}
     <a href={LINKS.sha256} class="link" data-i18n="hero.metaSha">{t.hero.metaSha}</a>
   </div>
 
