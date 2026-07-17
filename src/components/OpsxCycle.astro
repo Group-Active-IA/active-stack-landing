@@ -1,0 +1,58 @@
+---
+import { content } from '../i18n/content.js';
+const t = content.es;
+const colors = ['var(--brand-300)', 'var(--as-violet)', 'var(--as-cyan)', 'var(--as-teal)', 'var(--as-green)'];
+---
+
+<section id="opsx" class="wrap section">
+  <div class="section-head">
+    <span class="eyebrow" style="color: var(--as-violet);" data-i18n="opsx.eyebrow">{t.opsx.eyebrow}</span>
+    <h2 class="section-title" data-i18n="opsx.title">{t.opsx.title}</h2>
+  </div>
+
+  <div class="opsx-steps">
+    {t.opsx.steps.map((step, i) => (
+      <div class="glass-card opsx-step">
+        <div class="opsx-index">{String(i + 1).padStart(2, '0')}</div>
+        <div class="opsx-name" style={`color: ${colors[i]}`}>{step.name}</div>
+        <p data-i18n={`opsx.steps.${i}.desc`}>{step.desc}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .opsx-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .opsx-step {
+    flex: 1 1 190px;
+    max-width: 220px;
+    padding: 22px 20px;
+  }
+
+  .opsx-index {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--fg-4);
+    margin-bottom: 10px;
+  }
+
+  .opsx-name {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .opsx-step p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--fg-3);
+    line-height: var(--lh-normal);
+  }
+</style>

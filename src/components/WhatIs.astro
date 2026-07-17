@@ -1,0 +1,53 @@
+---
+import { content } from '../i18n/content.js';
+const t = content.es;
+---
+
+<section id="que-es" class="wrap section">
+  <div class="section-head">
+    <span class="eyebrow" style="color: var(--as-cyan);" data-i18n="whatIs.eyebrow">{t.whatIs.eyebrow}</span>
+    <h2 class="section-title" data-i18n="whatIs.title">{t.whatIs.title}</h2>
+  </div>
+  <div class="bullet-grid">
+    {t.whatIs.bullets.map((b, i) => (
+      <div class="glass-card bullet-card">
+        <div class="bullet-index">{String(i + 1).padStart(2, '0')}</div>
+        <p data-i18n={`whatIs.bullets.${i}`}>{b}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .bullet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .bullet-card {
+    padding: 28px;
+  }
+
+  .bullet-index {
+    width: 30px;
+    height: 30px;
+    border-radius: var(--r-sm);
+    background: var(--brand-glow);
+    color: var(--brand-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .bullet-card p {
+    margin: 0;
+    font-size: 15px;
+    color: var(--fg-2);
+    line-height: var(--lh-normal);
+  }
+</style>

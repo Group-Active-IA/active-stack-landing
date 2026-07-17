@@ -1,0 +1,70 @@
+---
+import { content } from '../i18n/content.js';
+const t = content.es;
+---
+
+<section id="faq" class="wrap-narrow section">
+  <div class="section-head" style="margin-bottom: 36px;">
+    <span class="eyebrow" style="color: var(--as-cyan);" data-i18n="faq.eyebrow">{t.faq.eyebrow}</span>
+  </div>
+
+  <div class="faq-list">
+    {t.faq.items.map((item, i) => (
+      <details class="glass-card faq-item" open={i === 0}>
+        <summary>
+          <span data-i18n={`faq.items.${i}.q`}>{item.q}</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+        <p data-i18n={`faq.items.${i}.a`}>{item.a}</p>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .faq-item {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 22px;
+    cursor: pointer;
+    list-style: none;
+    font-size: 15.5px;
+    font-weight: 500;
+    color: var(--fg-1);
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .chevron {
+    flex-shrink: 0;
+    color: var(--fg-3);
+    transition: transform var(--dur-normal) var(--ease-out);
+  }
+
+  .faq-item[open] .chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq-item p {
+    margin: 0;
+    padding: 0 22px 20px;
+    font-size: 14.5px;
+    color: var(--fg-3);
+    line-height: var(--lh-normal);
+  }
+</style>

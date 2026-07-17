@@ -1,0 +1,29 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import PlatformTabs from '../components/PlatformTabs.astro';
+import WhatIs from '../components/WhatIs.astro';
+import OpsxCycle from '../components/OpsxCycle.astro';
+import Catalog from '../components/Catalog.astro';
+import Agents from '../components/Agents.astro';
+import Faq from '../components/Faq.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Active Stack — el copiloto que prepara a tu agente de IA para construir software profesional"
+  description="Active Stack es un instalador open-source methodology-first: un binario que inyecta en tu agente de IA (Claude Code, Codex, OpenCode) todo el sustrato del ciclo OPSX. Descargalo gratis."
+>
+  <Header />
+  <main>
+    <Hero />
+    <PlatformTabs />
+    <WhatIs />
+    <OpsxCycle />
+    <Catalog />
+    <Agents />
+    <Faq />
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,67 @@
+---
+import { content } from '../i18n/content.js';
+const t = content.es;
+---
+
+<section class="wrap section">
+  <div class="section-head" style="margin-bottom: 36px;">
+    <span class="eyebrow" data-i18n="agents.eyebrow">{t.agents.eyebrow}</span>
+    <h2 class="section-title" data-i18n="agents.title">{t.agents.title}</h2>
+  </div>
+
+  <div class="agents-grid">
+    {t.agents.supported.map((name) => (
+      <div class="glass-card agent-pill">
+        <span class="agent-dot" style="background: var(--as-green);"></span>
+        <span class="agent-name">{name}</span>
+        <span class="agent-status" data-i18n="agents.supportedLabel">{t.agents.supportedLabel}</span>
+      </div>
+    ))}
+    {t.agents.soon.map((name) => (
+      <div class="glass-card agent-pill agent-pill-soon">
+        <span class="agent-dot" style="background: var(--fg-4);"></span>
+        <span class="agent-name">{name}</span>
+        <span class="agent-status" data-i18n="agents.soonLabel">{t.agents.soonLabel}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .agents-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .agent-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: var(--r-pill);
+  }
+
+  .agent-pill-soon {
+    opacity: 0.55;
+  }
+
+  .agent-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+  }
+
+  .agent-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--fg-1);
+  }
+
+  .agent-status {
+    font-size: 11px;
+    color: var(--fg-4);
+    font-family: var(--font-mono);
+  }
+</style>

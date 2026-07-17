@@ -1,0 +1,249 @@
+/* ---------- Design tokens ---------- */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --brand: #6366f1;
+  --brand-300: #a5b4fc;
+  --brand-glow: rgba(99, 102, 241, 0.35);
+  --as-violet: #8b5cf6;
+  --as-violet-soft: rgba(139, 92, 246, 0.14);
+  --as-cyan: #06b6d4;
+  --as-cyan-soft: rgba(6, 182, 212, 0.14);
+  --as-teal: #14b8a6;
+  --as-teal-soft: rgba(20, 184, 166, 0.14);
+  --as-green: #22c55e;
+  --warning: #f59e0b;
+  --warning-soft: rgba(245, 158, 11, 0.16);
+  --warning-fg: #fbbf24;
+
+  --bg-canvas: #0a0e1a;
+  --bg-canvas-2: #0f172a;
+  --bg-ambient: radial-gradient(1100px 520px at 50% -10%, rgba(99, 102, 241, 0.16), transparent 60%),
+    radial-gradient(900px 480px at 100% 0%, rgba(139, 92, 246, 0.08), transparent 55%), var(--bg-canvas);
+
+  --fg-1: #f1f5f9;
+  --fg-2: #cbd5e1;
+  --fg-3: #94a3b8;
+  --fg-4: #64748b;
+
+  --glass-1: rgba(30, 41, 59, 0.55);
+  --glass-2: rgba(51, 65, 85, 0.55);
+  --hairline: rgba(148, 163, 184, 0.14);
+  --hairline-strong: rgba(148, 163, 184, 0.28);
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', 'JetBrains Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --tracking-tight: -0.02em;
+  --tracking-snug: -0.01em;
+  --tracking-caps: 0.08em;
+  --lh-normal: 1.55;
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-glow: 0 0 0 1px rgba(99, 102, 241, 0.25), 0 8px 30px rgba(99, 102, 241, 0.22);
+
+  --blur-md: 14px;
+  --dur-fast: 120ms;
+  --dur-normal: 200ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --brand-300: #4f46e5;
+  --bg-canvas: #f8fafc;
+  --bg-canvas-2: #ffffff;
+  --bg-ambient: radial-gradient(1100px 520px at 50% -10%, rgba(99, 102, 241, 0.1), transparent 60%),
+    radial-gradient(900px 480px at 100% 0%, rgba(139, 92, 246, 0.06), transparent 55%), var(--bg-canvas);
+
+  --fg-1: #0f172a;
+  --fg-2: #334155;
+  --fg-3: #64748b;
+  --fg-4: #94a3b8;
+
+  --glass-1: rgba(255, 255, 255, 0.72);
+  --glass-2: rgba(241, 245, 249, 0.9);
+  --hairline: rgba(15, 23, 42, 0.08);
+  --hairline-strong: rgba(15, 23, 42, 0.16);
+
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-glow: 0 0 0 1px rgba(99, 102, 241, 0.18), 0 8px 30px rgba(99, 102, 241, 0.14);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --brand-300: #4f46e5;
+    --bg-canvas: #f8fafc;
+    --bg-canvas-2: #ffffff;
+    --fg-1: #0f172a;
+    --fg-2: #334155;
+    --fg-3: #64748b;
+    --fg-4: #94a3b8;
+    --glass-1: rgba(255, 255, 255, 0.72);
+    --glass-2: rgba(241, 245, 249, 0.9);
+    --hairline: rgba(15, 23, 42, 0.08);
+    --hairline-strong: rgba(15, 23, 42, 0.16);
+  }
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-ambient);
+  background-attachment: fixed;
+  color: var(--fg-1);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color var(--dur-normal) var(--ease-out), color var(--dur-normal) var(--ease-out);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.35);
+  color: #fff;
+}
+
+/* ---------- Shared utility classes ---------- */
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: 24px;
+}
+
+.wrap-narrow {
+  max-width: 760px;
+  margin: 0 auto;
+  padding-inline: 24px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.link {
+  color: var(--brand-300);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.glass-card {
+  background: var(--glass-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.section {
+  padding-block: 24px 96px;
+}
+
+.section-head {
+  max-width: 640px;
+  margin: 0 auto 44px;
+  text-align: center;
+}
+
+.section-title {
+  font-size: clamp(24px, 3.4vw, 34px);
+  font-weight: 600;
+  letter-spacing: var(--tracking-snug);
+  margin: 10px 0 0;
+  color: var(--fg-1);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 22px;
+  border-radius: var(--r-md);
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--hairline-strong);
+  color: var(--fg-2);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

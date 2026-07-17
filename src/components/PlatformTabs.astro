@@ -1,0 +1,225 @@
+---
+import { content } from '../i18n/content.js';
+const t = content.es;
+const panelDefs = [
+  { key: 'windows', panel: t.panels.windows, hasBadge: false, isWindows: true },
+  { key: 'linux', panel: t.panels.linux, hasBadge: false, isWindows: false },
+  { key: 'mac', panel: t.panels.mac, hasBadge: true, isWindows: false },
+];
+---
+
+<section id="descargar" class="wrap tabs-section">
+  <div class="tabs">
+    <input type="radio" name="platform-tab" id="tab-windows" class="sr-only tab-input" checked />
+    <input type="radio" name="platform-tab" id="tab-linux" class="sr-only tab-input" />
+    <input type="radio" name="platform-tab" id="tab-mac" class="sr-only tab-input" />
+
+    <div class="tab-bar" role="tablist">
+      <label for="tab-windows" class="tab-btn" data-i18n="tabsLabels.windows">{t.tabsLabels.windows}</label>
+      <label for="tab-linux" class="tab-btn" data-i18n="tabsLabels.linux">{t.tabsLabels.linux}</label>
+      <label for="tab-mac" class="tab-btn" data-i18n="tabsLabels.mac">{t.tabsLabels.mac}</label>
+    </div>
+
+    <div class="panels">
+      {panelDefs.map(({ key, panel, hasBadge, isWindows }) => (
+        <div class="panel" id={`panel-${key}`}>
+          <div class="panel-head">
+            <div>
+              <h3 data-i18n={`panels.${key}.title`}>{panel.title}</h3>
+              <p data-i18n={`panels.${key}.desc`}>{panel.desc}</p>
+            </div>
+            {hasBadge && (
+              <span class="badge" data-i18n={`panels.${key}.badge`}>{panel.badge}</span>
+            )}
+          </div>
+
+          {isWindows ? (
+            <>
+              <a href="https://github.com/Group-Active-IA/active-stack/releases/latest/download/ActiveStack-Setup.exe" class="btn btn-primary panel-cta">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"/><path d="m6 11 6 6 6-6"/><path d="M5 21h14"/></svg>
+                <span data-i18n={`panels.${key}.button`}>{panel.button}</span>
+              </a>
+              <ol class="panel-steps">
+                {panel.steps.map((step, i) => (
+                  <li data-i18n={`panels.${key}.steps.${i}`}>{step}</li>
+                ))}
+              </ol>
+            </>
+          ) : (
+            <>
+              <div class="code-block">
+                <button type="button" class="copy-btn" data-copy-target={`code-${key}`}>
+                  <span class="copy-label" data-copy-label>{t.copy.copy}</span>
+                </button>
+                <pre id={`code-${key}`}>{panel.code.join('\n')}</pre>
+              </div>
+              <p class="panel-caption" data-i18n={`panels.${key}.caption`}>{panel.caption}</p>
+            </>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .tabs-section {
+    max-width: 880px;
+    padding: 40px 24px 96px;
+  }
+
+  .tab-bar {
+    display: flex;
+    gap: 6px;
+    padding: 5px;
+    background: var(--glass-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-pill);
+    width: fit-content;
+    margin: 0 auto 28px;
+  }
+
+  .tab-btn {
+    height: 38px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    border-radius: var(--r-pill);
+    cursor: pointer;
+    font-size: 13.5px;
+    font-weight: 500;
+    font-family: var(--font-mono);
+    color: var(--fg-2);
+    transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+  }
+
+  .panel {
+    display: none;
+    background: var(--glass-1);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-xl);
+    box-shadow: var(--shadow-md);
+    padding: 28px;
+    animation: panel-fade-up 0.3s var(--ease-out);
+  }
+
+  @keyframes panel-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  #tab-windows:checked ~ .tab-bar label[for='tab-windows'],
+  #tab-linux:checked ~ .tab-bar label[for='tab-linux'],
+  #tab-mac:checked ~ .tab-bar label[for='tab-mac'] {
+    background: var(--brand);
+    color: #fff;
+  }
+
+  #tab-windows:checked ~ .panels #panel-windows,
+  #tab-linux:checked ~ .panels #panel-linux,
+  #tab-mac:checked ~ .panels #panel-mac {
+    display: block;
+  }
+
+  .panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .panel-head h3 {
+    margin: 0 0 4px;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--fg-1);
+  }
+
+  .panel-head p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--fg-3);
+  }
+
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: var(--r-pill);
+    background: var(--warning-soft);
+    color: var(--warning-fg);
+    white-space: nowrap;
+  }
+
+  .panel-cta {
+    margin-bottom: 18px;
+    height: 44px;
+    padding: 0 20px;
+    font-size: 14.5px;
+  }
+
+  .panel-steps {
+    margin: 0;
+    padding: 0 0 0 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .panel-steps li {
+    font-size: 14px;
+    color: var(--fg-2);
+    line-height: var(--lh-normal);
+    padding-left: 4px;
+  }
+
+  .code-block {
+    position: relative;
+    background: var(--bg-canvas-2);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    padding: 20px;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--fg-1);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: var(--r-sm);
+    background: var(--glass-2);
+    border: 1px solid var(--hairline);
+    color: var(--fg-3);
+    font-size: 11.5px;
+    font-family: var(--font-mono);
+    cursor: pointer;
+  }
+
+  .panel-caption {
+    margin: 14px 0 0;
+    font-size: 13px;
+    color: var(--fg-3);
+  }
+</style>
