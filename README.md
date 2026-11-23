@@ -17,7 +17,7 @@ npm run preview    # sirve el build de dist/
 
 ```
 src/
-  components/   # Header, Hero, PlatformTabs, WhatIs, OpsxCycle, Catalog, Agents, Faq, Footer
+  pages/index.astro  # toda la página: hero con terminal animada, qué es, qué instala (bento), fundación, método ODD/SDD + ciclo OPSX, equipo, seguridad, descarga, FAQ
   i18n/          # content.js — diccionario ES/EN + links del producto
   layouts/       # Layout.astro (head, theme init, fuentes del sistema)
   scripts/       # main.js — toggle de idioma/tema + copy-to-clipboard

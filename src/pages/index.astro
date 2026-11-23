@@ -1,29 +1,319 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Hero from '../components/Hero.astro';
-import PlatformTabs from '../components/PlatformTabs.astro';
-import WhatIs from '../components/WhatIs.astro';
-import OpsxCycle from '../components/OpsxCycle.astro';
-import Catalog from '../components/Catalog.astro';
-import Agents from '../components/Agents.astro';
-import Faq from '../components/Faq.astro';
-import Footer from '../components/Footer.astro';
+import { content, LINKS } from '../i18n/content.js';
+import { getLatestRelease } from '../lib/release.js';
+
+const t = content.es;
+const release = await getLatestRelease();
+
+const agents = ['Claude Code', 'Codex', 'OpenCode', 'Antigravity', 'Gemini', 'Cursor', 'VS Code', 'Windsurf'];
+const steps = ['s1', 's2', 's3', 's4', 's5', 's6'];
+const stepCode = [
+  'discovery/',
+  'knowledge-base/',
+  'design-system/',
+  'CHANGES.md',
+  'CLAUDE.md · AGENTS.md',
+  'team.json',
+];
+const cycle = ['c1', 'c2', 'c3', 'c4', 'c5'];
+const faq = ['1', '2', '3', '4', '5', '6'];
+const check =
+  '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 ---
 
-<Layout
-  title="Active Stack — el copiloto que prepara a tu agente de IA para construir software profesional"
-  description="Active Stack es un instalador open-source methodology-first: un binario que inyecta en tu agente de IA (Claude Code, Codex, OpenCode) todo el sustrato del ciclo OPSX. Descargalo gratis."
->
-  <Header />
-  <main>
-    <Hero />
-    <PlatformTabs />
-    <WhatIs />
-    <OpsxCycle />
-    <Catalog />
-    <Agents />
-    <Faq />
+<Layout title={t.meta.title} description={t.meta.description}>
+  <header class="header">
+    <div class="wrap header-in">
+      <a href="#top" class="brand" aria-label="Active Stack">
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect x="3" y="3" width="26" height="8" rx="3" stroke="var(--accent)" stroke-width="1.6"></rect>
+          <rect x="3" y="12" width="26" height="8" rx="3" stroke="var(--text)" stroke-width="1.6" opacity="0.6"></rect>
+          <rect x="3" y="21" width="26" height="8" rx="3" stroke="var(--text)" stroke-width="1.6" opacity="0.3"></rect>
+        </svg>
+        Active Stack
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="#que-es" data-i18n="nav.what">{t.nav.what}</a>
+        <a href="#instala" data-i18n="nav.installs">{t.nav.installs}</a>
+        <a href="#fundacion" data-i18n="nav.foundation">{t.nav.foundation}</a>
+        <a href="#metodo" data-i18n="nav.method">{t.nav.method}</a>
+        <a href="#equipo" data-i18n="nav.team">{t.nav.team}</a>
+      </nav>
+      <div class="tools">
+        <button class="tool" id="lang-toggle" type="button" data-i18n-title="nav.lang" title={t.nav.lang} aria-label={t.nav.lang}>ES</button>
+        <button class="tool" id="theme-toggle" type="button" data-i18n-title="nav.theme" title={t.nav.theme} aria-label={t.nav.theme}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        </button>
+        <a class="tool tool-dl" href="#descargar" data-i18n="nav.download">{t.nav.download}</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow rv" data-i18n="hero.eyebrow">{t.hero.eyebrow}</span>
+          <h1 class="rv" style="--i:1" data-i18n="hero.title">{t.hero.title}</h1>
+          <p class="lead rv" style="--i:2" data-i18n="hero.lead">{t.hero.lead}</p>
+          <div class="hero-cta rv" style="--i:3">
+            <a class="btn btn-primary" href={LINKS.exeLatest}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v13"></path><path d="m6 11 6 6 6-6"></path><path d="M5 21h14"></path></svg>
+              <span data-i18n="hero.primary">{t.hero.primary}</span>
+            </a>
+            <a class="btn" href={LINKS.repo}>
+              <span data-i18n="hero.secondary">{t.hero.secondary}</span>
+            </a>
+          </div>
+          <div class="hero-meta rv" style="--i:4">
+            {release.version && <span><span data-i18n="hero.version">{t.hero.version}</span> {release.version}</span>}
+            {release.sizeLabel && <span>{release.sizeLabel}</span>}
+            <a href={LINKS.sha256} data-i18n="hero.sha">{t.hero.sha}</a>
+          </div>
+        </div>
+        <div class="term rv" style="--i:2" aria-label="Demostración de la instalación">
+          <div class="term-bar">
+            <i class="term-dot"></i><i class="term-dot"></i><i class="term-dot"></i>
+            <span class="term-title">active-stack install</span>
+          </div>
+          <div class="term-body" id="term"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee" aria-label={t.agents.label}>
+      <div class="wrap">
+        <p class="marquee-label" data-i18n="agents.label">{t.agents.label}</p>
+      </div>
+      <div class="marquee-track" aria-hidden="true">
+        {[...agents, ...agents].map((a) => <span>{a}</span>)}
+      </div>
+    </div>
+
+    <section id="que-es">
+      <div class="wrap">
+        <span class="eyebrow rv" data-i18n="what.eyebrow">{t.what.eyebrow}</span>
+        <div class="what-grid">
+          <div>
+            <h2 class="rv" data-i18n="what.title">{t.what.title}</h2>
+            <p class="lead rv" style="--i:1" data-i18n="what.lead">{t.what.lead}</p>
+          </div>
+          <div class="pillars">
+            <div class="pillar rv"><span class="pillar-n">01</span><div><h3 data-i18n="what.p1Title">{t.what.p1Title}</h3><p data-i18n="what.p1Body">{t.what.p1Body}</p></div></div>
+            <div class="pillar rv" style="--i:1"><span class="pillar-n">02</span><div><h3 data-i18n="what.p2Title">{t.what.p2Title}</h3><p data-i18n="what.p2Body">{t.what.p2Body}</p></div></div>
+            <div class="pillar rv" style="--i:2"><span class="pillar-n">03</span><div><h3 data-i18n="what.p3Title">{t.what.p3Title}</h3><p data-i18n="what.p3Body">{t.what.p3Body}</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="instala" style="padding-top:0">
+      <div class="wrap">
+        <span class="eyebrow rv" data-i18n="installs.eyebrow">{t.installs.eyebrow}</span>
+        <h2 class="rv" data-i18n="installs.title">{t.installs.title}</h2>
+        <p class="lead rv" data-i18n="installs.lead">{t.installs.lead}</p>
+
+        <div class="bento">
+          <article class="tile t-a rv">
+            <div><h3 data-i18n="installs.memoryTitle">{t.installs.memoryTitle}</h3><p data-i18n="installs.memoryBody">{t.installs.memoryBody}</p></div>
+            <div class="viz mem">
+              <div class="mem-row" style="--k:0"><b>decision</b> auth con cookie httpOnly</div>
+              <div class="mem-row" style="--k:1"><b>bugfix</b> N+1 en lista de pedidos</div>
+              <div class="mem-row" style="--k:2"><b>pattern</b> errores como valores</div>
+            </div>
+          </article>
+          <article class="tile t-b rv" style="--i:1">
+            <div><h3 data-i18n="installs.methodTitle">{t.installs.methodTitle}</h3><p data-i18n="installs.methodBody">{t.installs.methodBody}</p></div>
+            <div class="viz chk"><div><i></i>proposal.md</div><div><i></i>specs/</div><div><i></i>design.md</div><div><i></i>tasks.md</div></div>
+          </article>
+          <article class="tile t-c rv">
+            <div><h3 data-i18n="installs.safeTitle">{t.installs.safeTitle}</h3><p data-i18n="installs.safeBody">{t.installs.safeBody}</p></div>
+          </article>
+          <article class="tile t-d rv" style="--i:1">
+            <div><h3 data-i18n="installs.docsTitle">{t.installs.docsTitle}</h3><p data-i18n="installs.docsBody">{t.installs.docsBody}</p></div>
+            <div class="viz lines"><span></span><span></span><span></span><span></span></div>
+          </article>
+          <article class="tile t-e rv" style="--i:2">
+            <div><h3 data-i18n="installs.browserTitle">{t.installs.browserTitle}</h3><p data-i18n="installs.browserBody">{t.installs.browserBody}</p></div>
+            <div class="viz win"><div class="win-bar"><i></i><i></i><i></i></div><div class="win-body"><span class="hl"></span><span style="width:80%"></span><span style="width:60%"></span></div></div>
+          </article>
+          <article class="tile t-f rv">
+            <div><h3 data-i18n="installs.designTitle">{t.installs.designTitle}</h3><p data-i18n="installs.designBody">{t.installs.designBody}</p></div>
+            <div class="viz sw"><span style="--k:0;background:var(--accent)"></span><span style="--k:1;background:var(--text)"></span><span style="--k:2;background:var(--faint)"></span><span style="--k:3;background:var(--line-strong)"></span></div>
+          </article>
+          <article class="tile t-g rv" style="--i:1">
+            <div><h3 data-i18n="safe.title">{t.safe.title}</h3><p data-i18n="safe.b1">{t.safe.b1}</p></div>
+            <div class="viz chk"><div><i></i><span data-i18n="safe.b2">{t.safe.b2}</span></div><div><i></i><span data-i18n="safe.b3">{t.safe.b3}</span></div></div>
+          </article>
+        </div>
+
+        <div class="modes rv" role="tablist">
+          <div class="mode-tabs">
+            <button class="mode-tab" role="tab" aria-selected="true" data-mode="lite" data-i18n="installs.modeLite">{t.installs.modeLite}</button>
+            <button class="mode-tab" role="tab" aria-selected="false" data-mode="full" data-i18n="installs.modeFull">{t.installs.modeFull}</button>
+            <button class="mode-tab" role="tab" aria-selected="false" data-mode="custom" data-i18n="installs.modeCustom">{t.installs.modeCustom}</button>
+          </div>
+          <div>
+            <p class="mode-panel on" data-mode-panel="lite" data-i18n="installs.modeLiteBody">{t.installs.modeLiteBody}</p>
+            <p class="mode-panel" data-mode-panel="full" data-i18n="installs.modeFullBody">{t.installs.modeFullBody}</p>
+            <p class="mode-panel" data-mode-panel="custom" data-i18n="installs.modeCustomBody">{t.installs.modeCustomBody}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fundacion" class="found">
+      <div class="wrap found-grid">
+        <div class="found-sticky">
+          <span class="eyebrow rv" data-i18n="foundation.eyebrow">{t.foundation.eyebrow}</span>
+          <h2 class="rv" data-i18n="foundation.title">{t.foundation.title}</h2>
+          <p class="lead rv" data-i18n="foundation.lead">{t.foundation.lead}</p>
+          <div class="found-count" aria-hidden="true"><span id="found-n">01</span><small>/06</small></div>
+        </div>
+        <div class="steps" id="steps">
+          {steps.map((s, i) => (
+            <div class="step" data-step={i + 1}>
+              <h3 data-i18n={`foundation.${s}`}>{t.foundation[s]}</h3>
+              <p data-i18n={`foundation.${s}b`}>{t.foundation[`${s}b`]}</p>
+              <code>{stepCode[i]}</code>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="metodo">
+      <div class="wrap">
+        <span class="eyebrow rv" data-i18n="method.eyebrow">{t.method.eyebrow}</span>
+        <h2 class="rv" data-i18n="method.title">{t.method.title}</h2>
+        <p class="lead rv" data-i18n="method.lead">{t.method.lead}</p>
+
+        <div class="seg rv" role="tablist" id="seg">
+          <span class="seg-thumb" id="seg-thumb"></span>
+          <button role="tab" aria-selected="true" data-sdd="odd" data-i18n="method.odd">{t.method.odd}</button>
+          <button role="tab" aria-selected="false" data-sdd="sdd" data-i18n="method.sdd">{t.method.sdd}</button>
+        </div>
+        <div class="sdd-body on" data-sdd-panel="odd">
+          <h3 data-i18n="method.oddName">{t.method.oddName}</h3>
+          <p data-i18n="method.oddBody">{t.method.oddBody}</p>
+        </div>
+        <div class="sdd-body" data-sdd-panel="sdd">
+          <h3 data-i18n="method.sddName">{t.method.sddName}</h3>
+          <p data-i18n="method.sddBody">{t.method.sddBody}</p>
+        </div>
+        <p class="promote" data-i18n="method.promote">{t.method.promote}</p>
+
+        <div class="cycle">
+          <p class="cycle-title" data-i18n="method.cycle">{t.method.cycle}</p>
+          <div class="cycle-track" id="cycle">
+            <span class="cycle-fill" id="cycle-fill"></span>
+            {cycle.map((c, i) => (
+              <button class="cyc" type="button" data-c={i}>
+                <span class="cyc-dot">{i + 1}</span>
+                <b data-i18n={`method.${c}`}>{t.method[c]}</b>
+                <span data-i18n={`method.${c}b`}>{t.method[`${c}b`]}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="equipo" style="padding-top:0">
+      <div class="wrap">
+        <span class="eyebrow rv" data-i18n="team.eyebrow">{t.team.eyebrow}</span>
+        <h2 class="rv" data-i18n="team.title">{t.team.title}</h2>
+        <p class="lead rv" data-i18n="team.lead">{t.team.lead}</p>
+        <div class="team-grid">
+          <div class="team-list">
+            <div class="team-item rv"><h3 data-i18n="team.t1">{t.team.t1}</h3><p data-i18n="team.t1b">{t.team.t1b}</p></div>
+            <div class="team-item rv"><h3 data-i18n="team.t2">{t.team.t2}</h3><p data-i18n="team.t2b">{t.team.t2b}</p></div>
+            <div class="team-item rv"><h3 data-i18n="team.t3">{t.team.t3}</h3><p data-i18n="team.t3b">{t.team.t3b}</p></div>
+            <div class="team-item rv"><h3 data-i18n="team.t4">{t.team.t4}</h3><p data-i18n="team.t4b">{t.team.t4b}</p></div>
+          </div>
+          <div class="lanes rv" aria-hidden="true">
+            <div class="lane main"><span class="lane-name">main</span><div class="chip"><small>main</small><span data-i18n="team.memRead">{t.team.memRead}</span></div></div>
+            <div class="lane"><span class="lane-name">feat/ficha-login</span><div class="chip"><small>feat-ficha-login-a3f9c1</small><span>Decisión: sesiones con cookie httpOnly</span></div></div>
+            <div class="lane"><span class="lane-name">feat/ficha-pagos</span><div class="chip"><small>feat-ficha-pagos-71be08</small><span>Hallazgo: el webhook reintenta 3 veces</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="seguro" style="padding-top:0">
+      <div class="wrap">
+        <span class="eyebrow rv" data-i18n="safe.eyebrow">{t.safe.eyebrow}</span>
+        <h2 class="rv" data-i18n="safe.title">{t.safe.title}</h2>
+        <div class="safe-list">
+          {['b1', 'b2', 'b3', 'b4'].map((b, i) => (
+            <div class="safe-item rv" style={`--i:${i}`}>
+              <Fragment set:html={check} />
+              <span data-i18n={`safe.${b}`}>{t.safe[b]}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="descargar" class="dl">
+      <div class="wrap dl-grid">
+        <div>
+          <span class="eyebrow rv" data-i18n="download.eyebrow">{t.download.eyebrow}</span>
+          <h2 class="rv" data-i18n="download.title">{t.download.title}</h2>
+          <p class="lead rv" data-i18n="download.lead">{t.download.lead}</p>
+          <div class="dl-links rv">
+            <a href={LINKS.releases} data-i18n="download.all">{t.download.all}</a>
+            <a href={LINKS.sha256} data-i18n="hero.sha">{t.hero.sha}</a>
+            <span>{release.version ?? ''}</span>
+          </div>
+        </div>
+        <div class="dl-card rv">
+          <div class="tabs" role="tablist">
+            <button role="tab" aria-selected="true" data-dl="win" data-i18n="download.tabWin">{t.download.tabWin}</button>
+            <button role="tab" aria-selected="false" data-dl="linux" data-i18n="download.tabLinux">{t.download.tabLinux}</button>
+          </div>
+          <div class="dl-panel on" data-dl-panel="win">
+            <h3 data-i18n="download.winTitle">{t.download.winTitle}</h3>
+            <p data-i18n="download.winBody">{t.download.winBody}</p>
+            <a class="btn btn-primary" href={LINKS.exeLatest}><span data-i18n="download.winCta">{t.download.winCta}</span></a>
+            <p class="note" data-i18n="download.smart">{t.download.smart}</p>
+          </div>
+          <div class="dl-panel" data-dl-panel="linux">
+            <h3 data-i18n="download.linuxTitle">{t.download.linuxTitle}</h3>
+            <p data-i18n="download.linuxBody">{t.download.linuxBody}</p>
+            <a class="btn btn-primary" href={LINKS.linuxBinary}><span data-i18n="download.linuxCta">{t.download.linuxCta}</span></a>
+            <div class="codebox"><code id="cmd">chmod +x active-stack_linux_amd64 &amp;&amp; ./active-stack_linux_amd64 install</code><button class="copy" type="button" data-copy="cmd" data-i18n="download.copy">{t.download.copy}</button></div>
+          </div>
+          <p class="note" data-i18n="download.next">{t.download.next}</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <h2 class="rv" data-i18n="faq.title">{t.faq.title}</h2>
+        <div class="faq">
+          {faq.map((n) => (
+            <details>
+              <summary><span data-i18n={`faq.q${n}`}>{t.faq[`q${n}`]}</span></summary>
+              <p data-i18n={`faq.a${n}`}>{t.faq[`a${n}`]}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
   </main>
-  <Footer />
+
+  <footer class="footer">
+    <div class="wrap footer-in">
+      <span data-i18n="footer.by">{t.footer.by}</span>
+      <nav>
+        <a href={LINKS.repo} data-i18n="footer.repo">{t.footer.repo}</a>
+        <a href={LINKS.guide} data-i18n="footer.guide">{t.footer.guide}</a>
+        <a href={LINKS.docs} data-i18n="footer.docs">{t.footer.docs}</a>
+        <span data-i18n="footer.license">{t.footer.license}</span>
+      </nav>
+    </div>
+  </footer>
 </Layout>
