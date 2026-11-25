@@ -39,6 +39,7 @@ const check =
         <a href="#fundacion" data-i18n="nav.foundation">{t.nav.foundation}</a>
         <a href="#metodo" data-i18n="nav.method">{t.nav.method}</a>
         <a href="#equipo" data-i18n="nav.team">{t.nav.team}</a>
+        <a href="#quienes-somos" data-i18n="nav.about">{t.nav.about}</a>
       </nav>
       <div class="tools">
         <button class="tool" id="lang-toggle" type="button" data-i18n-title="nav.lang" title={t.nav.lang} aria-label={t.nav.lang}>ES</button>
@@ -252,6 +253,38 @@ const check =
               <span data-i18n={`safe.${b}`}>{t.safe[b]}</span>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="quienes-somos" style="padding-top:0">
+      <div class="wrap">
+        <span class="eyebrow rv" data-i18n="about.eyebrow">{t.about.eyebrow}</span>
+        <h2 class="rv" data-i18n="about.title">{t.about.title}</h2>
+        <p class="lead rv" data-i18n="about.lead">{t.about.lead}</p>
+
+        <div class="org rv">
+          <div class="org-node org-top">
+            <span class="org-role" data-i18n="about.direction">{t.about.direction}</span>
+            <strong class="org-name">Alberto Cortez</strong>
+          </div>
+          <div class="org-row">
+            <div class="org-node">
+              <span class="org-role" data-i18n="about.pm">{t.about.pm}</span>
+              <strong class="org-name">Juan Cruz Robledo</strong>
+              <span class="org-note" data-i18n="about.pmNote">{t.about.pmNote}</span>
+            </div>
+            <div class="org-node org-squad">
+              <span class="org-role" data-i18n="about.squad">{t.about.squad}</span>
+              <ul class="people"><li class="person">Juani Sarmiento</li><li class="person">Matias Torres</li><li class="person">Emiliano Caceres</li><li class="person">Gianfranco Canciani</li><li class="person">Giuliano Espejo</li><li class="person">Neyen Bianchi</li></ul>
+              <span class="org-note" data-i18n="about.squadNote">{t.about.squadNote}</span>
+            </div>
+          </div>
+          <div class="fronts">
+            <div class="front"><b data-i18n="about.f1">{t.about.f1}</b><span data-i18n="about.f1b">{t.about.f1b}</span></div>
+            <div class="front"><b data-i18n="about.f2">{t.about.f2}</b><span data-i18n="about.f2b">{t.about.f2b}</span></div>
+            <div class="front"><b data-i18n="about.f3">{t.about.f3}</b><span data-i18n="about.f3b">{t.about.f3b}</span></div>
+          </div>
         </div>
       </div>
     </section>
