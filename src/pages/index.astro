@@ -263,12 +263,26 @@ const check =
         <h2 class="rv" data-i18n="about.title">{t.about.title}</h2>
         <p class="lead rv" data-i18n="about.lead">{t.about.lead}</p>
 
-        <div class="org rv">
-          <div class="org-node org-top">
-            <span class="org-role" data-i18n="about.direction">{t.about.direction}</span>
-            <strong class="org-name">Alberto Cortez</strong>
+        <div class="org">
+          <div class="org-node org-top rv">
+            <div class="org-portrait">
+              <img
+                src="/team/alberto-cortez-480.webp"
+                srcset="/team/alberto-cortez-240.webp 240w, /team/alberto-cortez-480.webp 480w"
+                sizes="(max-width: 540px) 112px, 168px"
+                width="480"
+                height="480"
+                loading="lazy"
+                decoding="async"
+                alt=""
+              />
+            </div>
+            <div class="org-profile">
+              <span class="org-role" data-i18n="about.direction">{t.about.direction}</span>
+              <strong class="org-name">Alberto Cortez</strong>
+            </div>
           </div>
-          <div class="org-row">
+          <div class="org-row rv" style="--i:1">
             <div class="org-node">
               <span class="org-role" data-i18n="about.pm">{t.about.pm}</span>
               <strong class="org-name">Juan Cruz Robledo</strong>
