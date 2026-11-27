@@ -7,6 +7,14 @@ const t = content.es;
 const release = await getLatestRelease();
 
 const agents = ['Claude Code', 'Codex', 'OpenCode', 'Antigravity', 'Gemini', 'Cursor', 'VS Code', 'Windsurf'];
+const technicalTeam = [
+  ['Juani Sarmiento', 'juani-sarmiento'],
+  ['Matias Torres', 'matias-torres'],
+  ['Emiliano Caceres', 'emiliano-caceres'],
+  ['Gianfranco Canciani', 'gianfranco-canciani'],
+  ['Giuliano Espejo', 'giuliano-espejo'],
+  ['Neyen Bianchi', 'neyen-bianchi'],
+];
 const steps = ['s1', 's2', 's3', 's4', 's5', 's6'];
 const stepCode = [
   'discovery/',
@@ -304,7 +312,16 @@ const check =
             </div>
             <div class="org-node org-squad">
               <span class="org-role" data-i18n="about.squad">{t.about.squad}</span>
-              <ul class="people"><li class="person">Juani Sarmiento</li><li class="person">Matias Torres</li><li class="person">Emiliano Caceres</li><li class="person">Gianfranco Canciani</li><li class="person">Giuliano Espejo</li><li class="person">Neyen Bianchi</li></ul>
+              <ul class="people">
+                {technicalTeam.map(([name, portrait]) => (
+                  <li class="person">
+                    <div class="org-portrait">
+                      <img src={`/team/${portrait}.webp`} width="144" height="144" loading="lazy" decoding="async" alt="" />
+                    </div>
+                    <span>{name}</span>
+                  </li>
+                ))}
+              </ul>
               <span class="org-note" data-i18n="about.squadNote">{t.about.squadNote}</span>
             </div>
           </div>
